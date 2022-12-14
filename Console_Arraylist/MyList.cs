@@ -57,54 +57,18 @@ namespace Console_Arraylist
             }
         }
 
-        public int Count => throw new NotImplementedException();
 
-        public bool IsReadOnly => throw new NotImplementedException();
-
-        public int Capacity { get; private set; }
-
-
-
-
-      
-
-        private void EnsureCapacity(int min)
-        {
-            if (_items.Length >= min)
-            {
-                int newCapacity = _items.Length == 0 ? _defaultCapacity : _items.Length * 2;
-               
-                if ((uint)newCapacity > 1000000) newCapacity = 1000000;
-                if (newCapacity < min) newCapacity = min;
-                Capacity = newCapacity;
-            }
-        }
-
-      
-
-
-
-        //public void Add(T item)
-        //{
-        //    if (_size == _items.Length) EnsureCapacity(_size + 1);
-        //    _items[_size++] = item;
-        //    //_version++;
-        //}
-
-        public void Add (T value)
+        public void Add(T value)
         {
             if (this._size == _items.Length)
             {
                 EnsureCapacity(this._size + 1);
             }
-            
+
             _items[_size++] = value;
-            
+
 
         }
-
-       
-
 
         public int IndexOf(T value)
         {
@@ -113,11 +77,11 @@ namespace Console_Arraylist
             return Array.IndexOf(_items, value, 0, _size);
         }
 
-        public int IndexOf( T value, int index)
+        public int IndexOf(T value, int index)
         {
             if (index > _size) throw new ArgumentOutOfRangeException("index");
-                return Array.IndexOf(_items, value, index, _size - index);
-        
+            return Array.IndexOf(_items, value, index, _size - index);
+
         }
 
         public bool Remove(T value)
@@ -127,12 +91,6 @@ namespace Console_Arraylist
                 RemoveAt(index);
             return true;
         }
-
-
-        //public bool Contains( T value)
-        //{
-        //    return IndexOf(value) != -1;
-        //}
 
         public bool Contains(T item)
         {
@@ -154,9 +112,46 @@ namespace Console_Arraylist
             }
         }
 
-        
+        public int Count => throw new NotImplementedException();
 
-        
+        public bool IsReadOnly => throw new NotImplementedException();
+
+        //public int Capacity { get; private set; }
+
+        public int Capacity
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<int>() >= 0);
+                return _items.Length;
+            }
+            set
+            {
+                if (value < _size)
+                {
+                    throw new ArgumentOutOfRangeException(); //ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value, ExceptionResource.ArgumentOutOfRange_SmallCapacity);
+                }
+                Contract.EndContractBlock();
+
+                if (value != _items.Length)
+                {
+                    if (value > 0)
+                    {
+                        T[] newItems = new T[value];
+                        if (_size > 0)
+                        {
+                            Array.Copy(_items, 0, newItems, 0, _size);
+                        }
+                        _items = newItems;
+                    }
+                    else
+                    {
+                        _items = _emptyarray;
+                      
+                    }
+                }
+            }
+        }
 
 
         public void CopyTo(T[] array)
@@ -164,7 +159,7 @@ namespace Console_Arraylist
             CopyTo(array, 0);
         }
 
-        void CopyTo(Array array, int arrayIndex)
+        public void CopyTo(Array array, int arrayIndex)
         {
             if ((array != null) && (array.Rank != 1))
             {
@@ -191,7 +186,7 @@ namespace Console_Arraylist
 
         public void Insert(int index, T item)
         {
-            // Note that insertions at the end are legal.
+
             if ((uint)index > (uint)_size)
             {
                 throw new NotImplementedException();
@@ -205,13 +200,9 @@ namespace Console_Arraylist
             }
             _items[index] = item;
             _size++;
-            //_version++;
+     
         }
 
-
-      
-
-        
 
         public void RemoveAt(int index)
         {
@@ -227,13 +218,19 @@ namespace Console_Arraylist
                 Array.Copy(_items, index + 1, _items, index, _size - index);
             }
             _items[_size] = default(T);
-            //_version++;
+            
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        private void EnsureCapacity(int min)
         {
-            throw new NotImplementedException();    
-            //return new Enumerator(this);
+            if (_items.Length >= min)
+            {
+                int newCapacity = _items.Length == 0 ? _defaultCapacity : _items.Length * 2;
+
+                if ((uint)newCapacity > 1000000) newCapacity = 1000000;
+                if (newCapacity < min) newCapacity = min;
+                Capacity = newCapacity;
+            }
         }
 
 
@@ -242,15 +239,134 @@ namespace Console_Arraylist
             // Delegate rest of error checking to Array.Copy.
             Array.Copy(_items, 0, array, arrayIndex, _size);
         }
+        
+        
+        //IEnumerator IEnumerable.GetEnumerator()
+        //{
+        //    return new Enumerator(this);
+        //}
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+
+        //IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        //{
+        //    return new Enumerator(this);
+        //}
+
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            if (_size > 0)
+            {
+                Array.Clear(_items, 0, _size); // Don't need to doc this but we clear the elements so that the gc can reclaim the references.
+                _size = 0;
+            }
+           
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return ((IEnumerable<T>)_items).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _items.GetEnumerator();
+        }
+
+        //public class MyListEnumerator : : IEnumerator<T>, IEnumerator
+        //{
+        //    private MyList? _items;
+        //    int index = -1;
+        //    private object? currentElement;
+
+        //    public MyListEnumerator(MyList? arrayList)
+        //    {
+        //        this._items = arrayList;
+        //    }
+
+        //    public object? Current => currentElement;
+
+        //    public bool MoveNext()
+        //    {
+        //        if (index == _items.Count - 1)
+        //            return false;
+
+        //        else
+        //            index++;
+        //        currentElement = _items[index];
+        //        return true;
+        //    }
+        //}
+
+        public struct Enumerator : IEnumerator<T>, System.Collections.IEnumerator
+        {
+            private List<T> list;
+            private int index;
+            //private int version;
+            private T current;
+
+            internal Enumerator(List<T> list)
+            {
+                this.list = list;
+                index = 0;
+                current = default(T);
+            }
+
+            public void Dispose()
+            {
+            }
+
+            public bool MoveNext()
+            {
+
+                List<T> localList = list;
+
+                if  ((uint)index < (uint)localList.Count)
+                {
+                    current = localList [index];
+                    index++;
+                    return true;
+                }
+                return MoveNextRare();
+            }
+
+            private bool MoveNextRare()
+            {
+                
+                index = list.Count + 1;
+                current = default(T);
+                return false;
+            }
+
+            public T Current
+            {
+                get
+                {
+                    return current;
+                }
+            }
+
+            Object System.Collections.IEnumerator.Current
+            {
+                get
+                {
+                    if (index == 0 || index == list.Count + 1)
+                    {
+                        throw new InvalidOperationException(); //ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_EnumOpCantHappen);
+                    }
+                    return Current;
+                }
+            }
+
+            void System.Collections.IEnumerator.Reset()
+            {
+                
+                index = 0;
+                current = default(T);
+            }
+
         }
     }
+
 }
+

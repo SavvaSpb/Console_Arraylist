@@ -217,7 +217,6 @@ namespace Console_Arraylist
             if (index == _items.Count - 1)
                 return false;
 
-            else
             index++;
             currentElement = _items[index];
             return true;

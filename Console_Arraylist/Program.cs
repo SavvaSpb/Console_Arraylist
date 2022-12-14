@@ -50,7 +50,7 @@ namespace Console_Arraylist
 
             //personA.Sort();
 
-            MyList<string> personB = new MyList<string>() { "Alex", "Nikolai", "Fedor", "Vasya" };
+            MyArrayList personB = new MyArrayList(3);
 
             personB.Add("Slava");
             personB.Add("Anton");
