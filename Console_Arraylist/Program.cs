@@ -50,15 +50,15 @@ namespace Console_Arraylist
 
             //personA.Sort();
 
-            MyList<string> personB = new MyList<string>() { "Alex", "Nikolai", "Fedor", "Vasya" };
+            MyArrayList EmployeesList = new MyArrayList(3);
 
-            personB.Add("Slava");
-            personB.Add("Anton");
-            personB.Add("Anton");
+            EmployeesList.Add("Slava");
+            EmployeesList.Add("Anton");
+            EmployeesList.Add("Anton");
 
             Console.WriteLine("\n MyList ");
 
-            Print(personB);
+            Print(EmployeesList);
 
             Console.Read();
 
