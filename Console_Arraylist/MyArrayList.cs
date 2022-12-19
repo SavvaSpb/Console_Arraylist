@@ -16,16 +16,21 @@ namespace Console_Arraylist
         private const int _defaultCapacity = 4;
         private object[] emptyarray = new object[0];
 
-        public MyArrayList(int capacity)
+        public MyArrayList()
         {
-            if (capacity < 0)
-                throw new ArgumentOutOfRangeException("capacity");
+            _items = new object[_defaultCapacity];
 
-            if (capacity == 0)
-                _items = emptyarray;
-            else
-                _items = new object[capacity];
+            //if (capacity < 0)
+            //    throw new ArgumentOutOfRangeException("capacity");
+
+            //if (capacity == 0)
+            //    _items = emptyarray;
+            //else
+            //    _items = new object[capacity];
+            
         }
+
+       
 
         public object? this[int index]
         {
@@ -47,17 +52,9 @@ namespace Console_Arraylist
             {
                 EnsureCapacity(this._size + 1);
             }
-            //object[] a = new object[_items.Length + 1];
-
+            
             _items[_size] = value!;
             _size++;
-
-            //for (int i = 0; i < _items.Length; i++)
-            //{
-            //    a[i] = _items[i];
-            //}
-            //a[a.Length - 1] = value;
-            //_items = a;
 
             return _size;
         }
@@ -97,6 +94,7 @@ namespace Console_Arraylist
         public void Clear()
         {
             _items = new object[0];
+            //_items = emptyarray;
         }
 
         public int Count

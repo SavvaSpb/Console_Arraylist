@@ -40,9 +40,6 @@ namespace Console_Arraylist
         }
 
 
-
-       // public T this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
         public T this[int index]
         {
             get
@@ -60,14 +57,9 @@ namespace Console_Arraylist
 
         public void Add(T value)
         {
-            if (this._size == _items.Length)
-            {
-                EnsureCapacity(this._size + 1);
-            }
-
+            if (_size == _items.Length) EnsureCapacity(_size + 1);
             _items[_size++] = value;
-
-
+            //_version++;
         }
 
         public int IndexOf(T value)
@@ -92,9 +84,9 @@ namespace Console_Arraylist
             return true;
         }
 
-        public bool Contains(T item)
+        public bool Contains(T value)
         {
-            if ((Object)item == null)
+            if ((Object)value == null)
             {
                 for (int i = 0; i < _size; i++)
                     if ((Object)_items[i] == null)
@@ -106,17 +98,18 @@ namespace Console_Arraylist
                 EqualityComparer<T> c = EqualityComparer<T>.Default;
                 for (int i = 0; i < _size; i++)
                 {
-                    if (c.Equals(_items[i], item)) return true;
+                    if (c.Equals(_items[i], value)) return true;
                 }
                 return false;
             }
         }
 
-        public int Count => throw new NotImplementedException();
+        //public int Count => throw new NotImplementedException();
+
+        public int Count
+        { get { return _size; } }
 
         public bool IsReadOnly => throw new NotImplementedException();
-
-        //public int Capacity { get; private set; }
 
         public int Capacity
         {
@@ -221,12 +214,13 @@ namespace Console_Arraylist
             
         }
 
+
         private void EnsureCapacity(int min)
         {
-            if (_items.Length >= min)
+            if (_items.Length < min)
             {
                 int newCapacity = _items.Length == 0 ? _defaultCapacity : _items.Length * 2;
-
+        
                 if ((uint)newCapacity > 1000000) newCapacity = 1000000;
                 if (newCapacity < min) newCapacity = min;
                 Capacity = newCapacity;
@@ -239,18 +233,6 @@ namespace Console_Arraylist
             // Delegate rest of error checking to Array.Copy.
             Array.Copy(_items, 0, array, arrayIndex, _size);
         }
-        
-        
-        //IEnumerator IEnumerable.GetEnumerator()
-        //{
-        //    return new Enumerator(this);
-        //}
-
-
-        //IEnumerator<T> IEnumerable<T>.GetEnumerator()
-        //{
-        //    return new Enumerator(this);
-        //}
 
 
         public void Clear()
@@ -273,30 +255,6 @@ namespace Console_Arraylist
             return _items.GetEnumerator();
         }
 
-        //public class MyListEnumerator : : IEnumerator<T>, IEnumerator
-        //{
-        //    private MyList? _items;
-        //    int index = -1;
-        //    private object? currentElement;
-
-        //    public MyListEnumerator(MyList? arrayList)
-        //    {
-        //        this._items = arrayList;
-        //    }
-
-        //    public object? Current => currentElement;
-
-        //    public bool MoveNext()
-        //    {
-        //        if (index == _items.Count - 1)
-        //            return false;
-
-        //        else
-        //            index++;
-        //        currentElement = _items[index];
-        //        return true;
-        //    }
-        //}
 
         public struct Enumerator : IEnumerator<T>, System.Collections.IEnumerator
         {
