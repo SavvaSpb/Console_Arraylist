@@ -11,122 +11,114 @@ namespace Console_Arraylist
         static void Main(string[] args)
         {
 
-            //MyArrayList personA = new MyArrayList();
-            //personA.Add("Sasha");
-            //personA.Add("Raul");
-            //personA.Add("Vitya");
-            //personA.Add("Lanik");
-            //personA.Add("Pasha");
+            MyArrayList personA = new MyArrayList();
 
-            //Console.WriteLine(" List ");
-            //Print(personA);
+            personA.Add("Sasha");
+            personA.Add("Raul");
+            personA.Add("Vitya");
+            personA.Add("Lanik");
+            personA.Add("Pasha");
 
-            //string myString = "Sasha";
-            //int myIndex = personA.IndexOf(myString);
-            //Console.WriteLine("\n The first occurrence of \"{0}\" is at index {1}.", myString, myIndex);
+            Console.WriteLine("\n MyArrayList \n");
+            Print(personA);
 
-            //personA.Remove("Lanik");
+            string myString = "Sasha";
+            int myIndex = personA.IndexOf(myString);
+            Console.WriteLine("\n The first occurrence of \"{0}\" is at index {1}.", myString, myIndex);
 
-            //Console.WriteLine("\n List_2 ");
-            //Print(personA);
+            personA.Remove("Lanik");
 
-            //string[] personNEW =
-            //{
-            //"Sofia",
-            //"Marta",
-            //"Olga",
-            //"Sveta",
-            //"Dasha"
-            //};
+            Console.WriteLine("\n MyArrayList without Lanik \n");
+            Print(personA);
 
-            //personA.CopyTo(personNEW, 0);
+            string[] personNEW =
+            {
+            "Sofia",
+            "Marta",
+            "Olga",
+            "Sveta",
+            "Dasha"
+            };
 
-            //Console.WriteLine("\n List_NEW ");
+            personA.CopyTo(personNEW, 0);
 
-            //Print(personNEW);
+            Console.WriteLine("\n Array personNEW, where MyArrayList copy to personNEW \n");
 
+            Print(personNEW);
 
-            //personA.Clear();
-
-            //personA.Sort();
+            Console.WriteLine("\n -------------------------------------------------------------- \n");
 
 
             //////////////////////////////////////////////////////////////////////////////////
 
 
-            //MyList<string> employeesList = new MyList<string>() { "Alpha" };
+            MyList<string> employeesList = new MyList<string>() { "Alpha" };
 
-            //employeesList.Add("Slava");
-            //employeesList.Add("Anton");
-            //employeesList.Add("!#424");
-            //employeesList.Add("B404");
-            //employeesList.Add("4JC");
-            //employeesList.Add("OG");
+            employeesList.Add("Slava");
+            employeesList.Add("Anton");
+            employeesList.Add("!#424");
+            employeesList.Add("B404");
+            employeesList.Add("4JC");
+            employeesList.Add("OG");
 
-            //Console.WriteLine("\n MyList \n");
+            Console.WriteLine("\n MyList \n");
 
-            //Print(employeesList);
-
-
-
-            //string myString = "Anton";
-            //int myIndex = employeesList.IndexOf(myString);
-            //Console.WriteLine("\n The first occurrence of \"{0}\" is at index {1}. \n", myString, myIndex);
+            Print(employeesList);
 
 
+            string myNewString = "Anton";
+            int myNewIndex = employeesList.IndexOf(myNewString);
+            Console.WriteLine("\n The first occurrence of \"{0}\" is at index {1}. \n", myNewString, myNewIndex);
 
 
-            //employeesList.Remove("B1");
+            employeesList.Remove("B404");
 
-            //Console.WriteLine("\n MyList without B1_Employee \n");
+            Console.WriteLine("\n MyList without B404_Employee \n");
 
-            //Print(employeesList);
-
-
+            Print(employeesList);
 
 
-            //string[] personNEW =
-            //{
-            //"Sofia",
-            //"Marta",
-            //"Olga",
-            //"Sveta",
-            //"Dasha",
-            //"Sofia",
-            //"Sofia",
-            //"Sofia",
-            //"Sofia",
-            //"Sofia",
-            //};
+            string[] personNEW_2 =
+            {
+            "Sofia",
+            "Marta",
+            "Olga",
+            "Sveta",
+            "Dasha",
+            "Sofia",
+            "Sofia",
+            "Sofia",
+            "Sofia",
+            "Sofia",
+            };
 
-            //Console.WriteLine("\n MyListPersonNEW employeesList_copy_to_personNEW  \n ");
+            Console.WriteLine("\n PersonNEW_2, where MyList employeesList copy to personNEW_2  \n ");
 
-            //employeesList.CopyTo(personNEW, 0);
+            employeesList.CopyTo(personNEW_2, 0);
 
-            //Print(personNEW);
-
-
+            Print(personNEW_2);
 
 
-            //Console.WriteLine("\n MyList insert_index3_Zorikkk \n");
+            Console.WriteLine("\n MyList insert index_3 ZZZorikkk \n");
 
-            //employeesList.Insert(3, "ZZZorikkk");
+            employeesList.Insert(3, "ZZZorikkk");
 
-            //Print(employeesList);
-
-
+            Print(employeesList);
 
 
-            //string myStringContains = "Anton";
-            //string element = " ";
+            string myStringContains = "Anton";
+            string element = " ";
 
-            //for (int i = 0; i < employeesList.Count; i++)
-            //{
-            //    if (employeesList[i].Contains(myStringContains))
-            //        element = employeesList[i];
-            //}
+            for (int i = 0; i < employeesList.Count; i++)
+            {
+                if (employeesList[i].Contains(myStringContains))
+                    element = employeesList[i];
+            }
 
-            //Console.WriteLine("\n MyList contains {0} \n", element);
+            Console.WriteLine("\n MyList contains {0} \n", element);
+
+            Console.WriteLine("\n -------------------------------------------------------------- \n");
+
 
             ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -138,55 +130,23 @@ namespace Console_Arraylist
             personsList.Add(new Person { Name = "Vlad", PasportId = 22 });
             personsList.Add(new Person { Name = "Yarik", PasportId = 99 });
 
+            Console.WriteLine("\n List<Person>, IndexOf Yarik \n");
+            Console.WriteLine( personsList.IndexOf(new Person() { Name = "Yarik", PasportId = 99 }));
 
-            //personsList.IndexOf(new Person() { Name = "Sam", PasportId = 18 });
-
-            Console.WriteLine(personsList.IndexOf(new Person() { Name = "Yarik", PasportId = 99 }));
-
-
-            //ArrayList Person = new ArrayList();
-
-            //Person.Add(new Person { Name = "Nikita", PasportId = 30 });
-            //Person.Add(new Person { Name = "Volodya", PasportId = 40 });
-            //Person.Add(new Person { Name = "Zeka", PasportId = 50 });
-
-            //Console.WriteLine(Person.IndexOf(new Person() { Name = "Zeka", PasportId = 50 }));
+            Console.WriteLine("\n -------------------------------------------------------------- \n");
 
 
+            ////////////////////////////////////////////////////////////////////////////////////////
 
 
+            ArrayList Person = new ArrayList();
 
+            Person.Add(new Person { Name = "Nikita", PasportId = 30 });
+            Person.Add(new Person { Name = "Volodya", PasportId = 40 });
+            Person.Add(new Person { Name = "Zeka", PasportId = 50 });
 
-            ///////////////////////////////////////////////////////////////////////////////////////////
-
-
-            //List<string> dinosaurs = new List<string>();
-
-            //dinosaurs.Add("Tyrannosaurus");
-            //dinosaurs.Add("Amargasaurus");
-            //dinosaurs.Add("Mamenchisaurus");
-            //dinosaurs.Add("Brachiosaurus");
-            //dinosaurs.Add("Deinonychus");
-            //dinosaurs.Add("Tyrannosaurus");
-            //dinosaurs.Add("Compsognathus");
-
-            //Console.WriteLine();
-            //foreach (string dinosaur in dinosaurs)
-            //{
-            //    Console.WriteLine(dinosaur);
-            //}
-
-            //Console.WriteLine("\nIndexOf(\"Tyrannosaurus\"): {0}",
-            //    dinosaurs.IndexOf("Tyrannosaurus"));
-
-            //Console.WriteLine("\nIndexOf(\"Tyrannosaurus\", 3): {0}",
-            //    dinosaurs.IndexOf("Tyrannosaurus", 3));
-
-            //Console.WriteLine("\nIndexOf(\"Tyrannosaurus\", 2, 2): {0}",
-            //    dinosaurs.IndexOf("Tyrannosaurus", 2, 2));
-
-
-
+            Console.WriteLine("\n ArrayList<Person>, IndexOf Zeka \n");
+            Console.WriteLine(Person.IndexOf(new Person() { Name = "Zeka", PasportId = 50 }));
 
 
             Console.Read();

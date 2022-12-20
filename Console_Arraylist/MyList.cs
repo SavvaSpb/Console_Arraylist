@@ -12,16 +12,14 @@ namespace Console_Arraylist
     public class MyList<T> : IList<T>
     {
         private T[] _items;
-        //[ContractPublicPropertyName("Count")]
+        
         private int _size;
-        //private int _version;
+        
         private const int _defaultCapacity = 4;
         
         private T[] _emptyarray = new T[0];
-        //static readonly T[] _emptyArray = new T[0];
+        
 
-        //[NonSerialized]
-        //private Object _syncRoot;
 
         public MyList()
         {
@@ -59,13 +57,10 @@ namespace Console_Arraylist
         {
             if (_size == _items.Length) EnsureCapacity(_size + 1);
             _items[_size++] = value;
-            //_version++;
         }
 
         public int IndexOf(T value)
         {
-            //Contract.Ensures(Contract.Result<int>() >= -1);
-            //Contract.Ensures(Contract.Result<int>() < Count);
             return Array.IndexOf(_items, value, 0, _size);
         }
 
@@ -104,7 +99,6 @@ namespace Console_Arraylist
             }
         }
 
-        //public int Count => throw new NotImplementedException();
 
         public int Count
         { get { return _size; } }
@@ -260,7 +254,6 @@ namespace Console_Arraylist
         {
             private List<T> list;
             private int index;
-            //private int version;
             private T current;
 
             internal Enumerator(List<T> list)

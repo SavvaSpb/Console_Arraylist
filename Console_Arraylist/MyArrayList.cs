@@ -19,18 +19,19 @@ namespace Console_Arraylist
         public MyArrayList()
         {
             _items = new object[_defaultCapacity];
-
-            //if (capacity < 0)
-            //    throw new ArgumentOutOfRangeException("capacity");
-
-            //if (capacity == 0)
-            //    _items = emptyarray;
-            //else
-            //    _items = new object[capacity];
-            
         }
 
-       
+        public MyArrayList(int capacity)
+        {
+            if (capacity < 0)
+                throw new ArgumentOutOfRangeException("capacity");
+
+            if (capacity == 0)
+                _items = emptyarray;
+            else
+                _items = new object[capacity];
+        }
+
 
         public object? this[int index]
         {
@@ -94,7 +95,7 @@ namespace Console_Arraylist
         public void Clear()
         {
             _items = new object[0];
-            //_items = emptyarray;
+            
         }
 
         public int Count
@@ -222,16 +223,6 @@ namespace Console_Arraylist
 
         public void Reset()
         {
-            //index = startIndex - 1;
-            //int checkForZero = 1;
-            //for (int i = 0; i < array.Rank; i++)
-            //{
-            //    _indices[i] = array.GetLowerBound(i);
-            //    checkForZero *= array.GetLength(i);
-            //}
-            //_complete = (checkForZero == 0);
-            //// To make MoveNext simpler, decrement least significant index.
-            //_indices[_indices.Length - 1]--;
             throw new NotImplementedException();
         }
     }
