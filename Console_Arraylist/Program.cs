@@ -132,16 +132,16 @@ namespace Console_Arraylist
 
 
 
-            List<Person> test = new List<Person>();
+            List<Person> personsList = new List<Person>();
 
-            test.Add(new Person { Name = "Sam", PasportId = 18 });
-            test.Add(new Person { Name = "Vlad", PasportId = 22 });
-            test.Add(new Person { Name = "Yarik", PasportId = 99 });
+            personsList.Add(new Person { Name = "Sam", PasportId = 18 });
+            personsList.Add(new Person { Name = "Vlad", PasportId = 22 });
+            personsList.Add(new Person { Name = "Yarik", PasportId = 99 });
 
 
-            //test.IndexOf(new Person() { Name = "Sam", PasportId = 18 });
+            //personsList.IndexOf(new Person() { Name = "Sam", PasportId = 18 });
 
-            Console.WriteLine(test.IndexOf(new Person() { Name = "Yarik", PasportId = 99 }));
+            Console.WriteLine(personsList.IndexOf(new Person() { Name = "Yarik", PasportId = 99 }));
 
 
             //ArrayList Person = new ArrayList();
