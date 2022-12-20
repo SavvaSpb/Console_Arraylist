@@ -16,6 +16,11 @@ namespace Console_Arraylist
         private const int _defaultCapacity = 4;
         private object[] emptyarray = new object[0];
 
+        public MyArrayList()
+        {
+            _items = new object[_defaultCapacity];
+        }
+
         public MyArrayList(int capacity)
         {
             if (capacity < 0)
@@ -26,6 +31,7 @@ namespace Console_Arraylist
             else
                 _items = new object[capacity];
         }
+
 
         public object? this[int index]
         {
@@ -47,17 +53,9 @@ namespace Console_Arraylist
             {
                 EnsureCapacity(this._size + 1);
             }
-            //object[] a = new object[_items.Length + 1];
-
+            
             _items[_size] = value!;
             _size++;
-
-            //for (int i = 0; i < _items.Length; i++)
-            //{
-            //    a[i] = _items[i];
-            //}
-            //a[a.Length - 1] = value;
-            //_items = a;
 
             return _size;
         }
@@ -97,6 +95,7 @@ namespace Console_Arraylist
         public void Clear()
         {
             _items = new object[0];
+            
         }
 
         public int Count
@@ -224,16 +223,6 @@ namespace Console_Arraylist
 
         public void Reset()
         {
-            //index = startIndex - 1;
-            //int checkForZero = 1;
-            //for (int i = 0; i < array.Rank; i++)
-            //{
-            //    _indices[i] = array.GetLowerBound(i);
-            //    checkForZero *= array.GetLength(i);
-            //}
-            //_complete = (checkForZero == 0);
-            //// To make MoveNext simpler, decrement least significant index.
-            //_indices[_indices.Length - 1]--;
             throw new NotImplementedException();
         }
     }
